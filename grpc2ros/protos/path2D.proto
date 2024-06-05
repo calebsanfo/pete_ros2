@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package ros2grpc;
+
+// Import the common types from Google Protobuf for timestamp handling
+import "google/protobuf/timestamp.proto";
+
+// Message representing a position (x, y) and orientation (theta)
+message Pose2D {
+    double x = 1;      // X position
+    double y = 2;      // Y position
+    double theta = 3;  // Orientation in radians
+}
+
+// Message representing a Pose with a header and Pose2D data
+message PoseStamped {
+    Header header = 1;  // Standard ROS message header
+    Pose2D pose = 2;    // Pose data
+}
+
+// Message representing a ROS standard Header
+message Header {
+    uint32 seq = 1;                   // Sequence number
+    google.protobuf.Timestamp stamp = 2;  // Time stamp
+    string frame_id = 3;              // Frame ID
+}
+
+// Message representing a sequence of poses in a path
+message Path2D {
+    repeated PoseStamped poses = 1;  // List of PoseStamped messages
+}
+
+// The gRPC service definition
+service PathService {
+    // RPC method to send a Path2D
+    rpc SendPath(Path2D) returns (Acknowledge);
+}
+
+// Simple acknowledgment message
+message Acknowledge {
+    bool success = 1;           // Whether the path was received successfully
+    string message = 2;         // Optional message, e.g., error details
+}

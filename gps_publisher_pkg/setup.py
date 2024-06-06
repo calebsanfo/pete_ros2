@@ -9,7 +9,10 @@ setup(
     py_modules=[
         'gps_publisher_pkg.gps_publisher',
     ],
-    install_requires=['setuptools'],
+    install_requires=[
+        'setuptools',
+        'adafruit-circuitpython-gps'
+    ],
     zip_safe=True,
     maintainer='Your Name',
     maintainer_email='your_email@example.com',

@@ -43,7 +43,7 @@ class GPSPublisher(Node):
         msg.position_covariance = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
         self.publisher_.publish(msg)
-        self.get_logger().info(f"Published GPS fix: {msg}")
+        #self.get_logger().info(f"Published GPS fix: {msg}")
 
 def main(args=None):
     rclpy.init(args=args)

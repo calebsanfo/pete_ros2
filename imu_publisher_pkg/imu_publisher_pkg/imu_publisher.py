@@ -9,7 +9,7 @@ from geometry_msgs.msg import Quaternion
 class IMUPublisher(Node):
     def __init__(self):
         super().__init__('imu_publisher')
-        self.publisher_ = self.create_publisher(Imu, '/imu/data', 10)
+        self.publisher_ = self.create_publisher(Imu, '/imu/mpu6050', 10)
         self.i2c = board.I2C()  # uses board.SCL and board.SDA
         self.mpu = adafruit_mpu6050.MPU6050(self.i2c)
 
